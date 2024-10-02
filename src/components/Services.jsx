@@ -1,5 +1,3 @@
-import React from "react";
-
 const services = [
   { title: "Web Development", description: "Build responsive and modern websites." },
   { title: "Mobile Apps", description: "Develop sleek and functional mobile applications." },
