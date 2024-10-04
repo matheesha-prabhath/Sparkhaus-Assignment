@@ -37,7 +37,7 @@ const Blog = () => {
   };
 
   if (loading) {
-    return <p>Loading blogs...</p>;
+    return <p>Loading blogs...</p>; // This can be replaced with a skeleton loader for better UX
   }
 
   if (error) {
@@ -47,12 +47,12 @@ const Blog = () => {
   // If a blog is selected, show the full content of that blog
   if (selectedBlog) {
     return (
-      <section className="py-20 bg-white">
-        <div className="container mx-auto">
+      <section className=" bg-white">
+        <div className="container shadow-md p-12 m-auto">
           <button onClick={goBackToList} className="mb-6 text-blue-500 hover:underline">
             Back to Blogs
           </button>
-          <h2 className="text-4xl font-bold mb-4">{selectedBlog.title}</h2>
+          <h2 className="text-4xl font-bold pt-4 pb-10">{selectedBlog.title}</h2>
           <img
             src={selectedBlog.photo_url}
             alt={selectedBlog.title}
@@ -60,22 +60,27 @@ const Blog = () => {
           />
           <div
             dangerouslySetInnerHTML={{ __html: selectedBlog.content_html }}
-            className="text-gray-800"></div>
+            className="text-gray-800 text-xl text-justify p-5 mb-4"
+          />
+          <p className="text-gray-600 p-5 text-right">
+            <strong>Published on:</strong> {new Date(selectedBlog.created_at).toLocaleDateString()}
+          </p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-100">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-10">Latest Blogs</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogs.slice(0, visibleBlogs).map((blog) => (
             <div
               key={blog.id}
-              className="blog-card bg-gray-100 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => viewFullBlog(blog)}>
+              className="blog-card bg-white p-6 shadow-md hover:shadow-lg rounded-md transition-shadow ease-in-out delay-150 cursor-pointer"
+              onClick={() => viewFullBlog(blog)}
+            >
               <img src={blog.photo_url} alt={blog.title} className="mb-4 w-full h-48 object-cover" />
               <h3 className="text-2xl font-bold mb-4">{blog.title}</h3>
               <p className="text-gray-600">
@@ -91,14 +96,16 @@ const Blog = () => {
           {visibleBlogs < blogs.length && (
             <button
               onClick={loadMoreBlogs}
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-4">
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-4"
+            >
               Load More
             </button>
           )}
-          {visibleBlogs > 4 && (
+          {visibleBlogs > 3 && (
             <button
               onClick={showLessBlogs}
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            >
               Show Less
             </button>
           )}
