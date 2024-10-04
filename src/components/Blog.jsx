@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  const [visibleBlogs, setVisibleBlogs] = useState(3); // Number of blogs to show initially
+  const [visibleBlogs, setVisibleBlogs] = useState(3); // Initial number of blogs to display
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,7 +21,11 @@ const Blog = () => {
   }, []);
 
   const loadMoreBlogs = () => {
-    setVisibleBlogs(blogs.length);
+    setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 3);
+  };
+
+  const showLessBlogs = () => {
+    setVisibleBlogs(3);
   };
 
   const viewFullBlog = (blog) => {
@@ -83,15 +87,22 @@ const Blog = () => {
             </div>
           ))}
         </div>
-        {visibleBlogs < blogs.length && (
-          <div className="text-center mt-8">
+        <div className="text-center mt-8">
+          {visibleBlogs < blogs.length && (
             <button
               onClick={loadMoreBlogs}
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-4">
               Load More
             </button>
-          </div>
-        )}
+          )}
+          {visibleBlogs > 4 && (
+            <button
+              onClick={showLessBlogs}
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
+              Show Less
+            </button>
+          )}
+        </div>
       </div>
     </section>
   );
