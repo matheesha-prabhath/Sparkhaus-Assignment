@@ -1,10 +1,21 @@
-const services = [
-  { title: "Web Development", description: "Build responsive and modern websites." },
-  { title: "Mobile Apps", description: "Develop sleek and functional mobile applications." },
-  { title: "UI/UX Design", description: "Craft user-friendly and beautiful interfaces." },
-];
+import useScrollReveal from "../hooks/useScrollReveal";
 
 const Services = () => {
+  const services = [
+    { title: "Web Development", description: "Build responsive and modern websites." },
+    { title: "Mobile Apps", description: "Develop sleek and functional mobile applications." },
+    { title: "UI/UX Design", description: "Craft user-friendly and beautiful interfaces." },
+  ];
+
+  // Apply ScrollReveal to service cards
+  useScrollReveal(".service-card", {
+    origin: "left",
+    distance: "100px",
+    duration: 1000,
+    reset: false,
+    interval: 200,
+  });
+
   return (
     <section className="py-20 bg-gray-100">
       <div className="container mx-auto">
@@ -13,7 +24,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white p-8 shadow-md hover:shadow-xl transition-shadow duration-300">
+              className="service-card bg-white p-8 shadow-md hover:shadow-xl transition-shadow">
               <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
               <p className="text-gray-600">{service.description}</p>
             </div>

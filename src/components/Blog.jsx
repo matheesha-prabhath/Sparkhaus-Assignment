@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  const [visibleBlogs, setVisibleBlogs] = useState(3); // Initial number of blogs to display
+  const [visibleBlogs, setVisibleBlogs] = useState(3);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,7 +74,7 @@ const Blog = () => {
           {blogs.slice(0, visibleBlogs).map((blog) => (
             <div
               key={blog.id}
-              className="bg-gray-100 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+              className="blog-card bg-gray-100 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
               onClick={() => viewFullBlog(blog)}>
               <img src={blog.photo_url} alt={blog.title} className="mb-4 w-full h-48 object-cover" />
               <h3 className="text-2xl font-bold mb-4">{blog.title}</h3>
